@@ -1,14 +1,14 @@
 import { useState } from "react";
-const api = {
-  key: "b8b30d722c0eb1067bb00613443705f0",
-  base: "https://api.openweathermap.org/data/2.5/",
-};
+
+const key=import.meta.env.VITE_APP_KEY;
+const base=import.meta.env.VITE_APP_BASE;
+
 export const Body = () => {
   const [query, setQuery] = useState(" ");
   const [weather, setWeather] = useState({});
 
   const fetchWeather = (location) => {
-    fetch(`${api.base}weather?q=${location}&units=metric&APPID=${api.key}`)
+    fetch(`${base}weather?q=${location}&units=metric&APPID=${key}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok");
@@ -39,7 +39,7 @@ export const Body = () => {
     fetchWeather(query);
   };
   if (query === " ") {
-    fetch(`${api.base}weather?q=delhi&units=metric&APPID=${api.key}`)
+    fetch(`${base}weather?q=delhi&units=metric&APPID=${key}`)
       .then((res) => res.json())
       .then((result) => {
         setWeather(result);
